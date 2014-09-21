@@ -1,0 +1,5 @@
+<ListOfTask>
+  <Task file="" description="Create a MotionMapSensor that goes under the MotionMap" completed="True" />
+  <Task file="" description="Need to make an interface for PositionGraph and MotionMapSenor to take care of the markers." />
+  <Task file="" description="Create a MarkerManager class to take some of the stuff out of Engine to make things readable" />
+</ListOfTask>
