@@ -2,4 +2,7 @@
   <Task file="" description="Create a MotionMapSensor that goes under the MotionMap" completed="True" />
   <Task file="" description="Need to make an interface for PositionGraph and MotionMapSenor to take care of the markers." />
   <Task file="" description="Create a MarkerManager class to take some of the stuff out of Engine to make things readable" />
+  <Task file="" description="Refactor some of the marker code into a PositionGraph marker class" />
+  <Task file="" description="Factor out the position stuff from the Engine class.  Some can go into the PositionMaker class." />
+  <Task file="" description="Make some sort of AI class to keep track of the &quot;missions.&quot;  Start to arrange them like in the worksheets." />
 </ListOfTask>

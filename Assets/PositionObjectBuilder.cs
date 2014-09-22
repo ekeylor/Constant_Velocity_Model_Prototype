@@ -78,8 +78,9 @@ public class PositionObjectBuilder {
 		positionLines.Clear();
 		while(positionLines.Count < positions.Count - 1) {
 			GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			obj.AddComponent<BoxCollider>();
 			obj.renderer.material.color = Color.cyan;
-			obj.name = "Position_Line_" + positionObjects.Count;
+			obj.name = "Position_Line_" + (positionLines.Count + 1);
 			obj.transform.localScale = Conversions.ScaleObject_PixelsToWorld(
 				lineLengths[positionLines.Count],
 				LINE_WIDTH, 
@@ -90,7 +91,7 @@ public class PositionObjectBuilder {
 			obj.transform.position = Conversions.PositionObject_PixelsToWorld(
 				xPositions[positionLines.Count] + (xPositions[positionLines.Count + 1] - xPositions[positionLines.Count])/2f,
 				yPositions[positionLines.Count] + (yPositions[positionLines.Count + 1] - yPositions[positionLines.Count])/2f,
-				.85f);
+				.95f);//.85f);
 			positionLines.Add(obj);
 		}
 	}

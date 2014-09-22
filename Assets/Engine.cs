@@ -40,6 +40,10 @@ public class Engine : MonoBehaviour {
 			currentTime += Time.deltaTime / 15.0f; // 15 seconds to cross position graph x axis
 			positionGraphMarkerX = Mathf.Lerp(pg.GetXAxisStartInPixels(), pg.GetXAxisEndInPixels(), currentTime);
 			pg.UpdateMarkerPosition(positionGraphMarkerX, pg.GetMarkerYInPixels());
+			if(pg.IsMarkerOnPositionLine())
+				pg.MarkerInBounds();
+			else
+				pg.MarkerOutOfBounds();
 		}
 	}
 

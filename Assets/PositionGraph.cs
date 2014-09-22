@@ -18,6 +18,7 @@ public class PositionGraph {
 	float yLength;
 
 	GameObject marker;
+	MarkerCollision markerCollisionTracker;
 
 	//public void setup(int xAxisStart, int xAxisLength, int yAxisStart, int yAxisLength, Color bgColor, Rect bgDimensions) {
 	public void Setup(Rect bgDimensions, Color bgColor) {//int xAxisStart, int yAxisStart, int xAxisLength, int yAxisLength, ) {
@@ -105,8 +106,10 @@ public class PositionGraph {
 	}
 	
 	private void MakeMarker() {
-		if(marker == null)
-			marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+		if(marker == null) {
+			marker = (GameObject)MonoBehaviour.Instantiate(Resources.Load("MarkerPrefab"));//GameObject.CreatePrimitive(PrimitiveType.Sphere);
+			markerCollisionTracker = (MarkerCollision)marker.GetComponent("MarkerCollision");
+		}
 		marker.transform.localScale = new Vector3(.2f, .2f, .2f);
 		marker.renderer.material.color = Color.green;
 		marker.transform.position = Conversions.PositionObject_PixelsToWorld(xStart, yStart, 1);
@@ -114,5 +117,17 @@ public class PositionGraph {
 
 	public float GetMarkerYInPixels() {
 		return Camera.main.WorldToScreenPoint(marker.transform.position).y;//Conversions.UnitsToPixels(marker.transform.position.y);
+	}
+
+	public void MarkerOutOfBounds() {
+		marker.renderer.material.color = Color.red;
+	}
+
+	public void MarkerInBounds() {
+		marker.renderer.material.color = Color.green;
+	}
+
+	public bool IsMarkerOnPositionLine() {
+		return markerCollisionTracker.IsMarkerOnPositionLine();
 	}
 }
