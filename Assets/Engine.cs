@@ -25,10 +25,17 @@ public class Engine : MonoBehaviour {
 
 	private float currentTime;
 
+	private GraphAxisLabel positionGraphCaptionText;
+	private GraphAxisLabel motionMapCaptionText;
+	private GraphAxisLabel messageText;
+
 	// Use this for initialization
 	void Start () {
 		mms = (MotionMapSensor)GameObject.Find("MotionMapSensorClass").GetComponent("MotionMapSensor");
 		positionGraphMarkerOnFlag = false;
+		positionGraphCaptionText = (GraphAxisLabel)GameObject.Find("PositionGraphCaptionText").GetComponent("GraphAxisLabel");
+		motionMapCaptionText = (GraphAxisLabel)GameObject.Find("MotionMapCaptionText").GetComponent("GraphAxisLabel");
+		messageText = (GraphAxisLabel)GameObject.Find("MessageText").GetComponent("GraphAxisLabel");
 	}
 	
 	// Update is called once per frame
@@ -49,7 +56,9 @@ public class Engine : MonoBehaviour {
 
 	void Test() {
 		currentTime = 0;
-		pg.Setup(new Rect(5, 100, POSITION_GRAPH_WIDTH, POSITION_GRAPH_HEIGHT), Color.white);
+		pg.Setup(new Rect(520, 100, POSITION_GRAPH_WIDTH, POSITION_GRAPH_HEIGHT), Color.white);
+		pg.MakeXAxisNumbers(0, 15);
+		pg.MakeYAxisNumbers(0, 5);
 		//PositionMaker.Make(Random.Range (0, MAX_POSITION_VALUE + 1), 
 		//                   Random.Range (1, 4), 
 		//                    Random.Range (0, MAX_POSITION_VALUE + 1),
@@ -58,12 +67,16 @@ public class Engine : MonoBehaviour {
 		positions = PositionMaker.GetPositions();
 		PositionObjectBuilder.Make(positions, MAX_POSITION_VALUE, pg.GetXAxisStartInPixels(), pg.GetYAxisStartInPixels(), pg.GetXAxisLengthInPixels(), pg.GetYAxisLengthInPixels());
 		// for debugging:  showPositions();
-		mm.Setup(new Rect(520, 100, MOTION_MAP_WIDTH, MOTION_MAP_HEIGHT), Color.white);
+		mm.Setup(new Rect(520, 400, MOTION_MAP_WIDTH, MOTION_MAP_HEIGHT), Color.white);
+		mm.MakeAxisNumbers(-1, 5, 3, 15);
 		mms.SetDimensions(mm.GetXAxisStartInPixels(), mm.GetXAxisEndInPixels(), mm.GetBottomInPixels(), mm.GetTopInPixels());
 		pg.TurnMarkerOn();
 		positionGraphMarkerOnFlag = true;
 		SetMarkersPositivePositions(-1, 5, -1, 5);
 		//SetMarkers(0, 5, 0, 5);
+		positionGraphCaptionText.SetLabel("Position Graph:");
+		motionMapCaptionText.SetLabel("Motion Map:");
+		messageText.SetLabel ("Hold down and move the big dot on the MOTION MAP line so the dot on the position chart stays over the line.");
 	}
 
 	/*  // Keep just in case

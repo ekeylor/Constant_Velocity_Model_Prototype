@@ -5,4 +5,12 @@
   <Task file="" description="Refactor some of the marker code into a PositionGraph marker class" />
   <Task file="" description="Factor out the position stuff from the Engine class.  Some can go into the PositionMaker class." />
   <Task file="" description="Make some sort of AI class to keep track of the &quot;missions.&quot;  Start to arrange them like in the worksheets." />
+  <Task file="" description="Make JSON-style output for player attempts and for data analysis" />
+  <Task file="" description="Collect an account of the motion from the player for qualitative analysis." />
+  <Task file="" description="Make the Motion Map arrows" />
+  <Task file="" description="Make the Motion Map interaction." />
+  <Task file="" description="Start a Velcoity Graph.  Have to figure out what the interactions will be.  Should probably look at other exercises than just the motion lab." />
+  <Task file="" description="Label Motion Map and make ticks" completed="True" />
+  <Task file="" description="Put Motion Map on the left and PositionGraph on the right.  CHANGED:  Put motion map BELOW the position graph for now." completed="True" />
+  <Task file="" description="Make a start over for motion tracking missions." />
 </ListOfTask>

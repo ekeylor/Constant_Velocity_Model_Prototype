@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 //refactor with PositionGraph
 public class MotionMap {
@@ -19,7 +20,14 @@ public class MotionMap {
 	float yBottom;
 	//float yStart;
 	//float yLength;
-	
+
+	List<GameObject> axisTicks;
+
+	GameObject zeroText;
+	GameObject maxText;
+	GameObject minText;
+	GraphAxisLabel label;
+
 	//public void setup(int xAxisStart, int xAxisLength, int yAxisStart, int yAxisLength, Color bgColor, Rect bgDimensions) {
 	public void Setup(Rect bgDimensions, Color bgColor) {//int xAxisStart, int yAxisStart, int xAxisLength, int yAxisLength, ) {
 		MakeBackgroundRectangle(bgDimensions, bgColor);
@@ -42,6 +50,12 @@ public class MotionMap {
 	private void MakeXAxis() {
 		if(xAxis == null)
 			xAxis = new XAxis();
+		if(axisTicks == null)
+			axisTicks = new List<GameObject>();
+		while(axisTicks.Count > 0) {
+			Object.Destroy(axisTicks[0]);
+			axisTicks.RemoveAt(0);
+		}
 		xAxis.Make(xStart, xLength, yMiddle, AXIS_WIDTH, ARROW_SIZE, OFFSET, "MotionMap");
 		//xAxis.SetLabel("PositionGraphXAxisLabel", "Time", new Vector3(xStart + xLength/2.0f, yStart - OFFSET/2, .9f));
 	}
@@ -56,6 +70,60 @@ public class MotionMap {
 			Screen.height - bgDimensions.y - Conversions.UnitsToPixels(background.renderer.bounds.size.y/2), 
 			1);
 		background.name = "MotionMap_background";
+	}
+
+	public void MakeAxisNumbers(int minNumber, int maxNumber, int AXIS_WIDTH, int ARROW_SIZE) {
+		float xZero = 0;
+		float xMaxText = 0;
+		float xMinText = 0;
+
+		int count = maxNumber - minNumber;
+		while(axisTicks.Count < count) {
+			GameObject tick = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			tick.renderer.material.color = Color.black;
+			tick.transform.localScale = Conversions.ScaleObject_PixelsToWorld(AXIS_WIDTH, ARROW_SIZE, 1);
+			tick.transform.position = Conversions.PositionObject_PixelsToWorld(
+				xStart + (float)axisTicks.Count/(float)count * xLength, 
+				yMiddle,
+				0.9f);
+			axisTicks.Add(tick);
+
+			if(axisTicks.Count - 1 == 0 && minNumber != 0)
+				xMinText = xStart + (float)(axisTicks.Count - 1)/(float)count * xLength;
+			if(axisTicks.Count - 1 + minNumber == 0)
+				xZero = xStart + (float)(axisTicks.Count - 1)/(float)count * xLength;
+			if(count == axisTicks.Count)
+				xMaxText = xStart + (float)axisTicks.Count/(float)count * xLength;
+		}
+		
+		// REFACTOR THIS!!!
+		minText = GameObject.Find("MotionMapMinText");
+		label = (GraphAxisLabel)minText.GetComponent("GraphAxisLabel");
+		if(minNumber != 0)
+			label.SetLabel("" + minNumber);
+		else
+			label.SetLabel("");
+
+		zeroText = GameObject.Find("MotionMapZeroText");
+		label = (GraphAxisLabel)zeroText.GetComponent("GraphAxisLabel");
+		label.SetLabel("0");
+		
+		maxText = GameObject.Find("MotionMapMaxText");
+		label = (GraphAxisLabel)maxText.GetComponent("GraphAxisLabel");
+		label.SetLabel("" + maxNumber);
+
+		minText.transform.position = new Vector3(
+			xMinText, 
+			yMiddle - ARROW_SIZE,
+			0);
+		zeroText.transform.position = new Vector3(
+			xZero, 
+			yMiddle - ARROW_SIZE,
+			0);
+		maxText.transform.position = new Vector3(
+			xMaxText, 
+			yMiddle - ARROW_SIZE,
+			0);
 	}
 	
 	public float GetXAxisStartInPixels() {

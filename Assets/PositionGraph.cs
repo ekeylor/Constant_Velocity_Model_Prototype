@@ -130,4 +130,12 @@ public class PositionGraph {
 	public bool IsMarkerOnPositionLine() {
 		return markerCollisionTracker.IsMarkerOnPositionLine();
 	}
+
+	public void MakeXAxisNumbers(int minNumber, int maxNumber) {
+		xAxis.MakeAxisNumbers(minNumber, maxNumber, AXIS_WIDTH, ARROW_SIZE);
+	}
+
+	public void MakeYAxisNumbers(int minNumber, int maxNumber) {
+		yAxis.MakeAxisNumbers(minNumber, maxNumber, AXIS_WIDTH, ARROW_SIZE);
+	}
 }
