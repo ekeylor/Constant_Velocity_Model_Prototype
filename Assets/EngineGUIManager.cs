@@ -47,16 +47,28 @@ public class EngineGUIManager : MonoBehaviour {
 			currentTime += Time.deltaTime / 15.0f; // 15 seconds to cross position graph x axis
 			positionGraphMarkerX = Mathf.Lerp(pg.GetXAxisStartInPixels(), pg.GetXAxisEndInPixels(), currentTime);
 			pg.UpdateMarkerPosition(positionGraphMarkerX, pg.GetMarkerYInPixels());
+			//Debug.Log(pg.IsMarkerOnPositionLine());
 			if(pg.IsMarkerOnPositionLine())
 				pg.MarkerInBounds();
 			else
 				pg.MarkerOutOfBounds();
 		}
+		if(currentTime >= 1.0f) {
+			positionGraphMarkerOnFlag = false;
+			//pg.TurnMarkerOff();
+			mms.TurnMarkerOff();
+			pg.MarkerReset();
+		}
 	}
 
 	public void MotionDetectorLab(List<string> directions) {
 		currentTime = 0;
-		motionDetectorLabGUI.Setup(pg, mm, mms);
+		motionDetectorLabGUI.Setup(pg, mm, mms, directions);
+		positions = PositionMaker.GetPositions();
+		PositionMaker.Make(directions, 0, InterfaceConstants.Get("max position value"));
+		PositionObjectBuilder.Make(positions, InterfaceConstants.Get("max position value"), pg.GetXAxisStartInPixels(), pg.GetYAxisStartInPixels(), pg.GetXAxisLengthInPixels(), pg.GetYAxisLengthInPixels());
+		pg.TurnMarkerOn();
+		mms.TurnMarkerOn();
 		/*
 		pg.Setup(new Rect(520, 100, POSITION_GRAPH_WIDTH, POSITION_GRAPH_HEIGHT), Color.white);
 		pg.MakeXAxisNumbers(0, 15);

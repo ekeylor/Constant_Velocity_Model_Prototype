@@ -11,7 +11,9 @@ public class MarkerCollision : MonoBehaviour {
 	}
 	void Update () {}
 
-	void Reset() {
+	public void Reset() {
+		if(enteredPositionLines == null)
+			enteredPositionLines = new List<string>();
 		enteredPositionLines.Clear();
 	}
 	/*
@@ -23,11 +25,15 @@ public class MarkerCollision : MonoBehaviour {
 	*/
 
 	public bool IsMarkerOnPositionLine() {
+		//foreach(string s in enteredPositionLines)
+		//	Debug.Log(s);
+		//Debug.Log("count:  " + enteredPositionLines.Count);
 		if(enteredPositionLines.Count == 0)
 			return false;
 		return true;
 	}
 
+	// For some reason, it seems that a line is being registered twice.  Why?
 	void OnTriggerEnter(Collider collider) {
 		if(collider.name.Contains("Position_Line") && !enteredPositionLines.Contains(collider.name)) {
 			enteredPositionLines.Add(collider.name);
@@ -38,10 +44,12 @@ public class MarkerCollision : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider collider) {
-		if(enteredPositionLines.Remove(collider.name)) {
+		//enteredPositionLines.RemoveAll((name) => { return (collider.name.Equals(name)); });
+		enteredPositionLines.Remove(collider.name);
+		//if(enteredPositionLines.Remove(collider.name)) {
 			//Debug.Log("leave");
 			//Debug.Log("collider:  " + collider.name);
 			//Debug.Log(enteredPositionLines.Count);
-		}
+		//}
 	}
 }

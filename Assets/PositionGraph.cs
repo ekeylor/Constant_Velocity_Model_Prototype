@@ -113,6 +113,7 @@ public class PositionGraph {
 		marker.transform.localScale = new Vector3(.2f, .2f, .2f);
 		marker.renderer.material.color = Color.green;
 		marker.transform.position = Conversions.PositionObject_PixelsToWorld(xStart, yStart, 1);
+		//markerCollisionTracker.Reset();
 	}
 
 	public float GetMarkerYInPixels() {
@@ -137,5 +138,9 @@ public class PositionGraph {
 
 	public void MakeYAxisNumbers(int minNumber, int maxNumber) {
 		yAxis.MakeAxisNumbers(minNumber, maxNumber, AXIS_WIDTH, ARROW_SIZE);
+	}
+
+	public void MarkerReset() {
+		markerCollisionTracker.Reset();
 	}
 }

@@ -20,7 +20,7 @@ public class MotionMapSensor : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		collider = (MotionMapCollider)GameObject.Find("MotionMapCollider").GetComponent("MotionMapCollider");
-		markerOnFlag = true;
+		//markerOnFlag = true;
 	}
 	
 	// Update is called once per frame
@@ -53,7 +53,7 @@ public class MotionMapSensor : MonoBehaviour {
 		if(marker == null)
 			MakeMotionMapMarker();
 
-		collider.Reset();
+		collider.TurnOff();
 		collider.SetScale(new Vector3(
 			Conversions.PixelsToUnits(xRight - xLeft),
 			Conversions.PixelsToUnits(yTop - yBottom),
@@ -66,11 +66,16 @@ public class MotionMapSensor : MonoBehaviour {
 	public void TurnMarkerOn() {
 		markerOnFlag = true;
 		marker.renderer.enabled = true;
-		UpdateMarkerPosition();
+		//UpdateMarkerPosition();
+		collider.TurnOn();
 	}
 
 	public void TurnMarkerOff() {
 		markerOnFlag = false;
+		collider.TurnOff();
+	}
+
+	public void HideMarker() {
 		marker.renderer.enabled = false;
 	}
 

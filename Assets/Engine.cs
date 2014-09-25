@@ -11,12 +11,6 @@ public class Engine : MonoBehaviour {
 	//MotionMap mm = new MotionMap();
 	MotionMapSensor mms;
 
-	private const int POSITION_GRAPH_WIDTH = 500;
-	private const int POSITION_GRAPH_HEIGHT = 250;
-	private const int MAX_POSITION_VALUE = 5;
-	private const int MOTION_MAP_WIDTH = 500;
-	private const int MOTION_MAP_HEIGHT = 100;
-
 	private bool positionGraphMarkerOnFlag;
 
 	private float adjustedPositionGraphYStart;
