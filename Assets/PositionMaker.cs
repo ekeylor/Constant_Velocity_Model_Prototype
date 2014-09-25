@@ -208,6 +208,13 @@ public class PositionMaker {
 		//Debug.Log("Max limits:  " + output);
 		return possiblePositions[Random.Range(0, possiblePositions.Count)];
 	}
+
+	public static void ShowPositions() {
+		string output = "";
+		foreach(int t in positions)
+			output += t + ", ";
+		Debug.Log("Positions:  " + output);
+	}
 }
 
 /*
