@@ -29,8 +29,7 @@ public class TutorialManager {
 		//foreach(string s in directions)
 		//	output += s + "  ";
 		//Debug.Log("Directions:  " + output);
-		
-		
+
 		return directions;
 	}
 }

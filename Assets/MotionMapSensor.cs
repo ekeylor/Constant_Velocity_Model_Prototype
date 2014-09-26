@@ -35,11 +35,8 @@ public class MotionMapSensor : MonoBehaviour {
 
 	private bool CheckRange() {
 		if(xLeft <= currentMouseX && currentMouseX <= xRight &&
-		   yBottom <= currentMouseY && currentMouseY <= yTop) {
-			//Debug.Log("current mouse x:  " + currentMouseX);
-			//Debug.Log("current mouse y:  " + currentMouseY);
+		   yBottom <= currentMouseY && currentMouseY <= yTop)
 			return true;
-		}
 		return false;
 	}
 
@@ -66,7 +63,6 @@ public class MotionMapSensor : MonoBehaviour {
 	public void TurnMarkerOn() {
 		markerOnFlag = true;
 		marker.renderer.enabled = true;
-		//UpdateMarkerPosition();
 		collider.TurnOn();
 	}
 

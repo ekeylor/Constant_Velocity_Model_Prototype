@@ -23,12 +23,13 @@ public class Engine : MonoBehaviour {
 	private GraphAxisLabel motionMapCaptionText;
 	private GraphAxisLabel messageText;
 
-	private EngineGUIManager guiManager;
+	private EngineManager engineManager;
 	TutorialManager tutorialManager;
+	MotionDetectorLabBehavior motionDetectorLabBehavior;
 
 	// Use this for initialization
 	void Start () {
-		guiManager = (EngineGUIManager)GameObject.Find("EngineGUIManagerClass").GetComponent("EngineGUIManager");
+		engineManager = (EngineManager)GameObject.Find("EngineManagerClass").GetComponent("EngineManager");
 		tutorialManager = new TutorialManager();
 	}
 	
@@ -36,6 +37,6 @@ public class Engine : MonoBehaviour {
 	void Update () {}
 
 	void Test() {
-		guiManager.MotionDetectorLab(tutorialManager.DirectionMaker());
+		engineManager.MotionDetectorLab(tutorialManager.DirectionMaker());
 	}
 }
